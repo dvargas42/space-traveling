@@ -37,10 +37,10 @@ export default function Home() {
         <title>Home | SpaceTraveling</title>
       </Head>
 
-      <main className={styles.container}>
+      <main className={styles.homeContainer}>
         <div className={styles.postList}>
           <img src="./images/logo.svg" alt="logo"/>
-          <a className={styles.post} href="#">
+          <a href="#">
             <h1>Como utilizar Hooks</h1>
             <strong>Pensando em sincronização em vez de ciclos de vida</strong>
             <section>
@@ -48,7 +48,7 @@ export default function Home() {
               <p><FiClock />Danilo Vieira</p>
             </section>
           </a>
-          <a className={styles.post} href="#">
+          <a href="#">
             <h1>Como utilizar Hooks</h1>
             <strong>Pensando em sincronização em vez de ciclos de vida</strong>
             <section>
@@ -56,7 +56,7 @@ export default function Home() {
               <p><FiClock />Danilo Vieira</p>
             </section>
           </a>
-          <a className={styles.post} href="#">
+          <a href="#">
             <h1>Como utilizar Hooks</h1>
             <strong>Pensando em sincronização em vez de ciclos de vida</strong>
             <section>
@@ -64,7 +64,7 @@ export default function Home() {
               <p><FiClock />Danilo Vieira</p>
             </section>
           </a>
-          <a className={styles.post} href="#">
+          <a href="#">
             <h1>Como utilizar Hooks</h1>
             <strong>Pensando em sincronização em vez de ciclos de vida</strong>
             <section>
@@ -72,7 +72,7 @@ export default function Home() {
               <p><FiClock />Danilo Vieira</p>
             </section>
           </a>
-          <a className={styles.post} href="#">
+          <a href="#">
             <h1>Como utilizar Hooks</h1>
             <strong>Pensando em sincronização em vez de ciclos de vida</strong>
             <section>
@@ -80,7 +80,7 @@ export default function Home() {
               <p><FiClock />Danilo Vieira</p>
             </section>
           </a>
-          <a className={styles.nextPage}>Carregar mais posts</a>
+          <button type="button">Carregar mais posts</button>
         </div>
       </main>
     </>
