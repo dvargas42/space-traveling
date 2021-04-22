@@ -1,12 +1,11 @@
-import styles from './header.module.scss'
+import styles from './header.module.scss';
 
 export default function Header() {
-  return(
+  return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
-        <img src="/images/logo.svg" alt="logo"/>
+        <img src="/images/logo.svg" alt="logo" />
       </div>
     </header>
-
-  )
+  );
 }
