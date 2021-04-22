@@ -16,7 +16,7 @@
       margin-top: 4rem;
     }
 
-    h1 {
+    strong {
       font-size: 1.75rem;
       font-weight: 700;
       line-height: 2.125rem;
@@ -25,11 +25,11 @@
       transition: color 0.2s;
     }
 
-    &:hover h1 {
+    &:hover strong {
       color: var(--magenta-500);
     }
 
-    strong {
+    p {
       display: block;
       margin-top: 0.5rem;
       font-size: 1.125rem;
@@ -52,7 +52,7 @@
         align-items: center;
       }
 
-      p {
+      span {
         display: flex;
         align-items: center;
 
