@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Logo" src="/logo.svg" width="500px">
+  <img alt="Logo" src="/image/logo.svg" width="500px">
 </h1>
 
 <h3 align="center">
@@ -71,7 +71,6 @@ Technologies that I used to develop this api
 - [TypeScript](https://www.typescriptlang.org/)
 - [Sass](https://sass-lang.com/)
 - [Prismic CMS](https://prismic.io/)
-- [Stripe](https://stripe.com/br)
 
 ## 💻 Getting started
 
