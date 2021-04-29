@@ -3,11 +3,10 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Prismic from '@prismicio/client'
-import { format } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR'
 import { FiCalendar, FiClock } from 'react-icons/fi'
 
 import { getPrismicClient } from '../services/prismic';
+import { DateFormat } from '../utility/dateFormat'
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
@@ -47,11 +46,7 @@ export default function Home({postsPagination}: HomeProps) {
       const posts: Post[] = postsResponse.results.map(post => {
         return {
           uid: post.uid,
-          first_publication_date: format(
-            new Date(post.first_publication_date),
-            'dd MMM yyyy',
-            { locale: ptBR }
-            ),
+          first_publication_date: post.first_publication_date,
           data: {
             title: post.data.title,
             subtitle: post.data.subtitle,
@@ -84,19 +79,20 @@ export default function Home({postsPagination}: HomeProps) {
                   <strong>{post.data.title}</strong>
                   <p>{post.data.subtitle}</p>
                   <section>
-                    <time><FiCalendar />{post.first_publication_date}</time>
+                    <time><FiCalendar />{DateFormat(post.first_publication_date)}</time>
                     <span><FiClock />{post.data.author}</span>
                   </section>
                 </a>
               </Link>
             )
           })}
-          <button
-            type="button"
-            onClick={handleNextPage}
-          >
-            Carregar mais posts
-          </button>
+          {next_page &&
+            <button
+                type="button"
+                onClick={handleNextPage}
+              >
+                Carregar mais posts
+              </button>}
         </div>
       </main>
     </>
@@ -113,18 +109,14 @@ export const getStaticProps: GetStaticProps = async () => {
         'post.title',
         'post.subtitle',
         'post.author'],
-      pageSize: 1,
+      pageSize: 2,
     }
   );
 
   const results = postsResponse.results.map(post => {
     return {
       uid: post.uid,
-      first_publication_date: format(
-        new Date(post.first_publication_date),
-        'dd MMM yyyy',
-        { locale: ptBR }
-        ),
+      first_publication_date: post.first_publication_date,
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,
@@ -142,6 +134,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       postsPagination,
     },
-    revalidate: 60 * 60 // 1 hour
+    revalidate: 60 * 60 * 24 // 24 hours
   }
 };
