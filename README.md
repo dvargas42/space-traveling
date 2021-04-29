@@ -3,10 +3,10 @@
 </h1>
 
 <h3 align="center">
-  ReactJS / NextJS Application for blog.
+  NextJS Application for blog.
 </h3>
 
-<p align="center">The best way to buy your shoes!</p>
+<p align="center">The best way to read your news!</p>
 
 <p align="center">
 
@@ -44,7 +44,7 @@
 ## 💇🏼 About the project
 
 This application was part of a challenge to test the ability to implement features
-functions and render information within a React web application.
+functions and render information within a ReactJS / NextJS web application.
 
 ## 📸 Sreenshots
 
@@ -71,6 +71,7 @@ Technologies that I used to develop this api
 - [TypeScript](https://www.typescriptlang.org/)
 - [Sass](https://sass-lang.com/)
 - [Prismic CMS](https://prismic.io/)
+- [Date FNS](https://date-fns.org/docs/Getting-Started)
 
 ## 💻 Getting started
 
