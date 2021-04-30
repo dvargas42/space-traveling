@@ -1,18 +1,21 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { FiCalendar, FiClock, FiUser } from 'react-icons/fi'
+import { useRouter } from 'next/router'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Prismic from '@prismicio/client'
+import { RichText } from 'prismic-dom'
+import { DateFormat} from '../../utils/dateFormat'
+import { ReadingTime } from '../../utils/readingTime'
+import { getPrismicClient } from '../../services/prismic'
 
 
-import Header from '../../components/Header';
-import { getPrismicClient } from '../../services/prismic';
-import { DateFormat} from '../../utility/dateFormat'
-import { ReadingTime } from '../../utility/readingTime'
+import Head from 'next/head'
+import Link from 'next/link'
+import Header from '../../components/Header'
+import Comment from '../../components/Comment'
+import { FiCalendar, FiClock, FiUser } from 'react-icons/fi'
 
-import commonStyles from '../../styles/common.module.scss';
-import styles from './post.module.scss';
-import { RichText } from 'prismic-dom';
+import commonStyles from '../../styles/common.module.scss'
+import styles from './post.module.scss'
+import { PreviewButton } from '../../components/PreviewButton'
 
 
 interface Post {
@@ -34,9 +37,11 @@ interface Post {
 
 interface PostProps {
   post: Post;
+  preview: boolean;
 }
 
-export default function Post({ post }: PostProps) {
+
+export default function Post({ post, preview }: PostProps) {
   const router = useRouter()
 
   if (router.isFallback) {
@@ -63,6 +68,10 @@ export default function Post({ post }: PostProps) {
             <span><FiUser />{post.data.author}</span>
             <span><FiClock />{ ReadingTime(post.data.content) } min</span>
           </div>
+
+          <div className={styles.lastUpdate}>
+            * editado em 19 mar 2021, às 15:49
+          </div>
           
           {post.data.content.map(content => {
             return(
@@ -76,6 +85,25 @@ export default function Post({ post }: PostProps) {
             )
           })}
         </article>
+
+        <footer className={styles.footContent}>
+          <section>
+            <Link href="/">
+              <a >
+                <p>Como utilizar Hooks</p>  
+                <span>Post anterior</span>
+              </a>
+            </Link>
+            <Link href="/">
+              <a>
+                <p> Criando um app CRA do Zero</p>
+                <span>Próximo Post</span>
+                </a>
+            </Link>
+          </section>
+          <Comment/>
+          <PreviewButton/>
+        </footer>
       </main>
     </>
   )
@@ -90,7 +118,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fetch: ['post.uid'],
     pageSize: 2,
     page: 1,
-    orderings: '[post.date desc]'
+    orderings: '[post.first_publication_date desc]',
     }
   )
 
@@ -106,12 +134,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 };
 
-export const getStaticProps: GetStaticProps = async context => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params
-
+  const { preview = false, previewData } = context
+  
   const prismic = getPrismicClient();
 
-  const response = await prismic.getByUID('post', String(slug), {})
+  const response = await prismic.getByUID(
+    'post', 
+    String(slug),
+    {
+      ref: previewData?.ref ?? null,
+    }
+  )
+
 
   const post = {
     uid: response.uid,
@@ -134,7 +170,8 @@ export const getStaticProps: GetStaticProps = async context => {
  
   return {
     props: {
-      post
+      post,
+      preview,
     },
     revalidate: 60 * 60 * 24 // 24 hours
   }
