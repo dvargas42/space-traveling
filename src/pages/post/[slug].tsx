@@ -40,44 +40,41 @@ export default function Post({ post }: PostProps) {
   const router = useRouter()
 
   if (router.isFallback) {
-    return <h1>Carregando...</h1>
+    return <h1 className={styles.loading}>Carregando...</h1>
   }
 
-  return (
+  return (      
     <>
       <Head>
         <title>Post | SpaceTraveling</title>
       </Head>
+      <Header />
+      <img
+        className={styles.banner}
+        src={post.data.banner.url}
+        alt="Banner"
+      />
       <main className={styles.container}>
-        <Header />
-
-        <img
-          className={styles.banner}
-          src={post.data.banner.url}
-          alt="Banner"
-        />
-
         <article className={styles.content}>
           <h1>{post.data.title}</h1>
+
           <div className={styles.info}>
             <time><FiCalendar />{DateFormat(post.first_publication_date)}</time>
             <span><FiUser />{post.data.author}</span>
             <span><FiClock />{ ReadingTime(post.data.content) } min</span>
           </div>
-
-          <div className={styles.postContent}>
-            {post.data.content.map(content => {
-              return(
-                <div key={ content.heading }>
-                  <h2>{ content.heading }</h2>
-                  <div
-                    dangerouslySetInnerHTML={
-                      { __html: RichText.asHtml(content.body)}} 
-                  />
-                </div>
-              )
-            })}
-          </div>
+          
+          {post.data.content.map(content => {
+            return(
+              <div key={ content.heading } className={styles.postContent}>
+                <h2>{ content.heading }</h2>
+                <div
+                  dangerouslySetInnerHTML={
+                    { __html: RichText.asHtml(content.body)}} 
+                />
+              </div>
+            )
+          })}
         </article>
       </main>
     </>
