@@ -9,3 +9,11 @@ export function DateFormat(date: string) {
     { locale: ptBR }
   )
 }
+
+export function TimeFormat(date: string) {
+  return format(
+    new Date(date),
+    'HH:mm',
+    { locale: ptBR }
+  )
+}
