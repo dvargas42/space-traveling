@@ -49,8 +49,14 @@
   }
 }
 
+.lastUpdate {
+  margin-top: 1rem;
+  font: italic 400 0.875rem Inter, sans-serif;
+  color: var(--gray-300);
+}
+
 .postContent {
-  margin-top: 4rem;
+  margin-top: 3.75rem;
   text-align: justify;
 
 
@@ -90,4 +96,50 @@
       line-height: 1.575rem;
       color: var( --gray-200);
     }
+}
+
+.footContent {
+  margin-top: 3.75rem;
+  max-width: 700px;
+  margin: 0 auto;
+
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+
+    a {
+      color: var(--gray-100);
+
+      p {
+        font: 400 1.125rem Inter, sans-serif;
+      }
+
+      span {
+        margin-top: 0.5rem;
+        display: block;
+        font: 600 1rem Inter, sans-serif;
+        color: var(--magenta-500);
+      }
+
+      transition: color 0.2s;
+
+      &:hover {
+        color: var(--magenta-500);
+      }
+
+      & + a {
+        text-align: right;
+      }
+    }
+  }
+
+  div {
+    margin-top: 5rem;
+  }
+
+  aside {
+    margin-top: 5rem;
+  }
 }
