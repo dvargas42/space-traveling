@@ -1,5 +1,8 @@
-.container {
-  height: calc(100vh - 6.5625rem);
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 100vh; 
 }
 
 .banner {
@@ -8,67 +11,83 @@
   object-fit: cover;
 }
 
+.container {
+  margin: 5rem auto;
+  padding: 0 2rem;
+}
+
 .content {
   max-width: 700px;
   margin: 0 auto;
 
   h1 {
-    margin-top: 5rem;
     font: 700 3rem Inter, sans-serif;
     line-height: 3.625rem;
     color: var(--gray-100);
   }
+}
 
-  .info {
-    margin-top: 1.5rem;
+.info {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  color: var(--gray-300);
+
+  svg {
+    margin-right: 0.5rem;
+    height: 20px;
+    width: 20px;
+  }
+
+  time, span {
     display: flex;
     align-items: center;
-    color: var(--gray-300);
-
-    svg {
-      margin-right: 0.5rem;
-      height: 20px;
-      width: 20px;
-    }
-
-    time, span {
-      display: flex;
-      align-items: center;
-    }
-
-    span {
-      margin-left: 1.5rem;
-    }
   }
 
-  .postContent {
-    margin-top: 4rem;
+  span {
+    margin-left: 1.5rem;
+  }
+}
 
-    div {
+.postContent {
+  margin-top: 4rem;
+  text-align: justify;
 
-      h2 {
-        margin-bottom: 4rem;
-        font: 700 2.25rem Inter, sans-serif;
-        line-height: 3.15rem;
-        color: var(--gray-100);
-      }
-  
-      p {
-        font: 400 1.125rem Inter, sans-serif;
-        line-height: 1.575rem;
-        text-align: justify;
+
+    h2 {
+      margin-bottom: 1.575rem;
+      font: 700 2.25rem Inter, sans-serif;
+      line-height: 3.15rem;
+      color: var(--gray-100);
+    }
+
+    p {
+      margin-top: 1.575rem;
+      font: 400 1.125rem Inter, sans-serif;
+      line-height: 1.575rem;
+      color: var( --gray-200);
+      display: inline-block;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    a {
+      font: inherit;
+      color: var(--magenta-500);
+      
+      transition: color 0.2s;
+
+      &:hover {
         color: var( --gray-200);
-        display: inline-block;
-        
-        & + p {
-          margin-top: 2rem;
-        }
       }
-  
-      strong {
-        font-weight: 700;
-      }
-
     }
-  }
+
+    li {
+      font: 400 1.125rem Inter, sans-serif;
+      margin-top: 1.575rem;
+      line-height: 1.575rem;
+      color: var( --gray-200);
+    }
 }
