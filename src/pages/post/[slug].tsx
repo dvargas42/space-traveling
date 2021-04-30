@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Prismic from '@prismicio/client'
 import { RichText } from 'prismic-dom'
-import { DateFormat} from '../../utils/dateFormat'
+import { DateFormat, TimeFormat } from '../../utils/format'
 import { ReadingTime } from '../../utils/readingTime'
 import { getPrismicClient } from '../../services/prismic'
 
@@ -20,6 +20,7 @@ import { PreviewButton } from '../../components/PreviewButton'
 
 interface Post {
   first_publication_date: string | null;
+  last_publication_date: string | null;
   data: {
     title: string;
     banner: {
@@ -69,9 +70,14 @@ export default function Post({ post, preview }: PostProps) {
             <span><FiClock />{ ReadingTime(post.data.content) } min</span>
           </div>
 
-          <div className={styles.lastUpdate}>
-            * editado em 19 mar 2021, às 15:49
-          </div>
+          {post.last_publication_date && (
+             <div className={styles.lastUpdate}>
+             * editado em { DateFormat(post.last_publication_date) }, 
+             às { TimeFormat(post.last_publication_date)}
+           </div>
+          )}
+
+         
           
           {post.data.content.map(content => {
             return(
@@ -102,7 +108,7 @@ export default function Post({ post, preview }: PostProps) {
             </Link>
           </section>
           <Comment/>
-          <PreviewButton/>
+          {preview && <PreviewButton/>}
         </footer>
       </main>
     </>
@@ -148,10 +154,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   )
 
-
+  
   const post = {
     uid: response.uid,
     first_publication_date: response.first_publication_date,
+    last_publication_date: response.last_publication_date,
     data: {
       title: response.data.title,
       subtitle: response.data.subtitle,
