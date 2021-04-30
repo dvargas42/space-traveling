@@ -51,13 +51,13 @@ functions and render information within a ReactJS / NextJS web application.
 Images of the application in operation.
 
 <p align="center">
-<img alt="Screen01" src="" width="400px">
-<img alt="Screen02" src="" width="400px">
+<img alt="Screen01" src="https://res.cloudinary.com/dvargas42/image/upload/v1619748979/spacetraveling/Captura_de_tela_de_2021-04-29_23-04-11_zkwrwm.png" width="400px">
+<img alt="Screen02" src="https://res.cloudinary.com/dvargas42/image/upload/v1619748982/spacetraveling/Captura_de_tela_de_2021-04-29_23-09-33_om3hyl.png" width="400px">
 </p>
 
 <p align="center">
-<img alt="Screen03" src="" width="400px">
-<img alt="Screen04" src="" width="400px">
+<img alt="Screen03" src="https://res.cloudinary.com/dvargas42/image/upload/v1619748984/spacetraveling/Captura_de_tela_de_2021-04-29_23-07-33_vgzwcb.png" width="400px">
+<img alt="Screen04" src="https://res.cloudinary.com/dvargas42/image/upload/v1619748983/spacetraveling/Captura_de_tela_de_2021-04-29_23-08-11_kwv7po.png" width="400px">
 </p>
 
 ## 🚀 Technologies
