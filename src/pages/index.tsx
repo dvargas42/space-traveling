@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { GetStaticProps } from 'next'
+import Prismic from '@prismicio/client'
+import { getPrismicClient } from '../services/prismic';
+import { DateFormat } from '../utils/format'
+
 import Head from 'next/head'
 import Link from 'next/link'
-import Prismic from '@prismicio/client'
 import { FiCalendar, FiClock } from 'react-icons/fi'
-
-import { getPrismicClient } from '../services/prismic';
-import { DateFormat } from '../utils/dateFormat'
+import { PreviewButton } from '../components/PreviewButton'
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
-import { PreviewButton } from '../components/PreviewButton'
 
 interface Post {
   uid?: string;
@@ -95,15 +95,9 @@ export default function Home({ postsPagination, preview }: HomeProps): JSX.Eleme
               Carregar mais posts
             </button>
           )}
-          {preview && (
-            <aside>
-              <Link href="/api/exit-preview">
-                <a>Sair do modo Preview</a>
-              </Link>
-            </aside>
-          )}
+          
         </div>
-        <PreviewButton />
+        {preview && <PreviewButton/>}
       </main>
     </>
   )
