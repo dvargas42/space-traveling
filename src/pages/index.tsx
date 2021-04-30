@@ -6,10 +6,11 @@ import Prismic from '@prismicio/client'
 import { FiCalendar, FiClock } from 'react-icons/fi'
 
 import { getPrismicClient } from '../services/prismic';
-import { DateFormat } from '../utility/dateFormat'
+import { DateFormat } from '../utils/dateFormat'
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
+import { PreviewButton } from '../components/PreviewButton'
 
 interface Post {
   uid?: string;
@@ -28,9 +29,10 @@ interface PostPagination {
 
 interface HomeProps {
   postsPagination: PostPagination;
+  preview: boolean;
 }
 
-export default function Home({postsPagination}: HomeProps) {
+export default function Home({ postsPagination, preview }: HomeProps): JSX.Element {
   const [next_page, setNextPage] = useState(postsPagination.next_page)
   const [results, setResults] = useState(postsPagination.results)
 
@@ -60,7 +62,6 @@ export default function Home({postsPagination}: HomeProps) {
     } catch (err) {
       alert(err)
     }
-
   }
 
   return (
@@ -86,20 +87,33 @@ export default function Home({postsPagination}: HomeProps) {
               </Link>
             )
           })}
-          {next_page &&
+          {next_page && (
             <button
-                type="button"
-                onClick={handleNextPage}
-              >
-                Carregar mais posts
-              </button>}
+            type="button"
+            onClick={handleNextPage}
+            >
+              Carregar mais posts
+            </button>
+          )}
+          {preview && (
+            <aside>
+              <Link href="/api/exit-preview">
+                <a>Sair do modo Preview</a>
+              </Link>
+            </aside>
+          )}
         </div>
+        <PreviewButton />
       </main>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({
+  preview = false,
+  previewData,
+}) => {
+
   const prismic = getPrismicClient();
 
   const postsResponse = await prismic.query(
@@ -110,6 +124,7 @@ export const getStaticProps: GetStaticProps = async () => {
         'post.subtitle',
         'post.author'],
       pageSize: 2,
+      ref: previewData?.ref ?? null,
     }
   );
 
@@ -133,6 +148,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       postsPagination,
+      preview,
     },
     revalidate: 60 * 60 * 24 // 24 hours
   }
