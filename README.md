@@ -56,8 +56,13 @@ Images of the application in operation.
 </p>
 
 <p align="center">
-<img alt="Screen03" src="https://res.cloudinary.com/dvargas42/image/upload/v1619748984/spacetraveling/Captura_de_tela_de_2021-04-29_23-07-33_vgzwcb.png" width="400px">
-<img alt="Screen04" src="https://res.cloudinary.com/dvargas42/image/upload/v1619748983/spacetraveling/Captura_de_tela_de_2021-04-29_23-08-11_kwv7po.png" width="400px">
+<img alt="Screen03" src="https://res.cloudinary.com/dvargas42/image/upload/v1619896097/spacetraveling/Captura_de_tela_de_2021-05-01_16-02-36_ezezxr.png" width="400px">
+<img alt="Screen04" src="https://res.cloudinary.com/dvargas42/image/upload/v1619896096/spacetraveling/Captura_de_tela_de_2021-05-01_16-04-47_rr5stj.png" width="400px">
+</p>
+
+<p align="center">
+<img alt="Screen05" src="https://res.cloudinary.com/dvargas42/image/upload/v1619896096/spacetraveling/Captura_de_tela_de_2021-05-01_15-59-33_kdj7hp.png" width="400px">
+<img alt="Screen06" src="https://res.cloudinary.com/dvargas42/image/upload/v1619896096/spacetraveling/Captura_de_tela_de_2021-05-01_16-03-38_hjuqja.png" width="400px">
 </p>
 
 ## 🚀 Technologies
@@ -72,6 +77,7 @@ Technologies that I used to develop this api
 - [Sass](https://sass-lang.com/)
 - [Prismic CMS](https://prismic.io/)
 - [Date FNS](https://date-fns.org/docs/Getting-Started)
+- [Utterances](https://utteranc.es/?installation_id=16628195&setup_action=install)
 
 ## 💻 Getting started
 
@@ -82,7 +88,13 @@ Technologies that I used to develop this api
 
 **Create account on the following services**
 
-These services will provide information for populating environment variables in the .env.local file
+This service requires permission to install itself in one of your GitHub repositories 
+where you will use your issues as a storage location.
+
+- [Utterances](https://utteranc.es/?installation_id=16628195&setup_action=install)
+
+This service will provide information for populating environment variables in the .env.local file
+that must be created in the project folder
 
 - [Prismic CMS](https://prismic.io/)
 
@@ -94,15 +106,16 @@ $ git clone https://github.com/dvargas42/space-traveling.git
 
 **Follow the steps below**
 
+Install the dependencies
 ```bash
-# Install the dependencies
 $ yarn
-
-# To finish, run the webapp 
-$ yarn dev
-
-# Well done, project is started!
 ```
+To finish, run the webapp 
+```bash
+$ yarn dev
+```
+
+Well done, project is started!
 
 ## 🤔 How to contribute
 
