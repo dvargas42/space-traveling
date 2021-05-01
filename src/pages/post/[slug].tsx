@@ -21,6 +21,14 @@ import { PreviewButton } from '../../components/PreviewButton'
 interface Post {
   first_publication_date: string | null;
   last_publication_date: string | null;
+  postBefore: {
+    uid: string | null;
+    title: string | null;
+  },
+  postAfter: {
+    uid: string | null;
+    title: string | null;
+  },
   data: {
     title: string;
     banner: {
@@ -40,7 +48,6 @@ interface PostProps {
   post: Post;
   preview: boolean;
 }
-
 
 export default function Post({ post, preview }: PostProps) {
   const router = useRouter()
@@ -94,18 +101,23 @@ export default function Post({ post, preview }: PostProps) {
 
         <footer className={styles.footContent}>
           <section>
-            <Link href="/">
-              <a >
-                <p>Como utilizar Hooks</p>  
-                <span>Post anterior</span>
-              </a>
-            </Link>
-            <Link href="/">
-              <a>
-                <p> Criando um app CRA do Zero</p>
-                <span>Próximo Post</span>
+            {post.postBefore ? (
+              <Link href={`/post/${post.postBefore?.uid}`}>
+                <a >
+                  <p>{post.postBefore?.title}</p>  
+                  <span>Post anterior</span>
                 </a>
-            </Link>
+              </Link>
+            ) :  <a/>}
+
+            {post.postAfter ? (
+              <Link href={`/post/${post.postAfter?.uid}`}>
+                <a >
+                  <p>{post.postAfter?.title}</p>  
+                  <span>Próximo Post</span>
+                </a>
+              </Link>
+            ) : <a/>}
           </section>
           <Comment/>
           {preview && <PreviewButton/>}
@@ -154,11 +166,44 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   )
 
+  const responsePostBefore = await prismic.query([
+    Prismic.Predicates.dateBefore(
+      'document.first_publication_date',
+      response.first_publication_date),
+    ], {
+      fetch: ['post.uid', 'post.title',],
+      pageSize: 1,
+    }
+  )
+
+  const responsePostAfter = await prismic.query([
+    Prismic.Predicates.dateAfter(
+      'document.first_publication_date',
+      response.first_publication_date),
+    ], {
+      fetch: ['post.uid', 'post.title',],
+      orderings: '[document.first_publication_date]',
+      pageSize: 1,
+    }
+  )
+
+  const postBefore = responsePostBefore.results[0] ? {
+    uid: responsePostBefore.results[0].uid,
+    title: responsePostBefore?.results[0].data.title
+  } : null;
+
+  const postAfter = responsePostAfter.results[0] ? {
+    uid: responsePostAfter.results[0].uid,
+    title: responsePostAfter?.results[0].data.title
+  } : null;
+
   
   const post = {
     uid: response.uid,
     first_publication_date: response.first_publication_date,
     last_publication_date: response.last_publication_date,
+    postBefore,
+    postAfter,
     data: {
       title: response.data.title,
       subtitle: response.data.subtitle,
