@@ -166,37 +166,45 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   )
 
-  const responsePostBefore = await prismic.query([
-    Prismic.Predicates.dateBefore(
-      'document.first_publication_date',
-      response.first_publication_date),
-    ], {
-      fetch: ['post.uid', 'post.title',],
-      pageSize: 1,
-    }
-  )
+  let postBefore = null
 
-  const responsePostAfter = await prismic.query([
-    Prismic.Predicates.dateAfter(
-      'document.first_publication_date',
-      response.first_publication_date),
-    ], {
-      fetch: ['post.uid', 'post.title',],
-      orderings: '[document.first_publication_date]',
-      pageSize: 1,
-    }
-  )
+  let postAfter = null
 
-  const postBefore = responsePostBefore.results[0] ? {
-    uid: responsePostBefore.results[0].uid,
-    title: responsePostBefore?.results[0].data.title
-  } : null;
+  if (response.first_publication_date) {
+    const responsePostBefore = await prismic.query([
+      Prismic.Predicates.dateBefore(
+        'document.first_publication_date',
+        response.first_publication_date),
+      ], {
+        fetch: ['post.uid', 'post.title',],
+        pageSize: 1,
+        ref: previewData?.ref ?? null,
+      }
+    )
+  
+    const responsePostAfter = await prismic.query([
+      Prismic.Predicates.dateAfter(
+        'document.first_publication_date',
+        response.first_publication_date),
+      ], {
+        fetch: ['post.uid', 'post.title',],
+        orderings: '[document.first_publication_date]',
+        pageSize: 1,
+        ref: previewData?.ref ?? null,
+      }
+    )
+  
+    postBefore = responsePostBefore.results[0] ? {
+      uid: responsePostBefore.results[0].uid,
+      title: responsePostBefore?.results[0].data.title
+    } : null;
+  
+    postAfter = responsePostAfter.results[0] ? {
+      uid: responsePostAfter.results[0].uid,
+      title: responsePostAfter?.results[0].data.title
+    } : null;
 
-  const postAfter = responsePostAfter.results[0] ? {
-    uid: responsePostAfter.results[0].uid,
-    title: responsePostAfter?.results[0].data.title
-  } : null;
-
+  } 
   
   const post = {
     uid: response.uid,
