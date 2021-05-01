@@ -17,7 +17,6 @@ import commonStyles from '../../styles/common.module.scss'
 import styles from './post.module.scss'
 import { PreviewButton } from '../../components/PreviewButton'
 
-
 interface Post {
   first_publication_date: string | null;
   last_publication_date: string | null;
@@ -72,7 +71,17 @@ export default function Post({ post, preview }: PostProps) {
           <h1>{post.data.title}</h1>
 
           <div className={styles.info}>
-            <time><FiCalendar />{DateFormat(post.first_publication_date)}</time>
+            <time><FiCalendar />
+            {
+              DateFormat(!post.first_publication_date 
+                ? Intl.DateTimeFormat(
+                    'en-GB',
+                    { dateStyle: 'full' }
+                  ).format(new Date()) 
+                : post.first_publication_date
+              )
+            }
+            </time>
             <span><FiUser />{post.data.author}</span>
             <span><FiClock />{ ReadingTime(post.data.content) } min</span>
           </div>

@@ -80,7 +80,17 @@ export default function Home({ postsPagination, preview }: HomeProps): JSX.Eleme
                   <strong>{post.data.title}</strong>
                   <p>{post.data.subtitle}</p>
                   <section>
-                    <time><FiCalendar />{DateFormat(post.first_publication_date)}</time>
+                    <time><FiCalendar />
+                    {
+                      DateFormat(!post.first_publication_date 
+                        ? Intl.DateTimeFormat(
+                            'en-GB',
+                            { dateStyle: 'full' }
+                          ).format(new Date()) 
+                        : post.first_publication_date
+                      )
+                    }
+                    </time>
                     <span><FiClock />{post.data.author}</span>
                   </section>
                 </a>
@@ -95,7 +105,6 @@ export default function Home({ postsPagination, preview }: HomeProps): JSX.Eleme
               Carregar mais posts
             </button>
           )}
-          
         </div>
         {preview && <PreviewButton/>}
       </main>
@@ -119,6 +128,7 @@ export const getStaticProps: GetStaticProps = async ({
         'post.author'],
       pageSize: 2,
       ref: previewData?.ref ?? null,
+      //orderings: '[document.first_publication_date desc]',
     }
   );
 
