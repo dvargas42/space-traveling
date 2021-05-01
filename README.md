@@ -87,7 +87,7 @@ Technologies that I used to develop this api
 - [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
 
 
-**Create account on the following services**
+### Create account on the following services
 
 This service requires permission to install itself in one of your GitHub repositories 
 where you will use your issues as a storage location.
@@ -95,19 +95,17 @@ where you will use your issues as a storage location.
 - [Utterances](https://utteranc.es/?installation_id=16628195&setup_action=install)
 
 This service will provide information for populating environment variables in the .env.local file
-that must be created in the project folder
+that must be created in the root project folder.
 
 - [Prismic CMS](https://prismic.io/)
 
-
-**Clone the project and access the folder**
+### Clone the project and access the folder
 
 ```bash
 $ git clone https://github.com/dvargas42/space-traveling.git
 ```
 
-
-**Follow the steps below**
+### Follow the steps below**
 
 Install the dependencies
 ```bash
