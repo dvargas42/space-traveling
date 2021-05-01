@@ -128,7 +128,7 @@ export const getStaticProps: GetStaticProps = async ({
         'post.author'],
       pageSize: 2,
       ref: previewData?.ref ?? null,
-      //orderings: '[document.first_publication_date desc]',
+      orderings: '[document.first_publication_date desc]',
     }
   );
 
