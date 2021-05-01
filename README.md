@@ -86,6 +86,7 @@ Technologies that I used to develop this api
 - [Node.js](https://nodejs.org/en/)
 - [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
 
+
 **Create account on the following services**
 
 This service requires permission to install itself in one of your GitHub repositories 
@@ -98,11 +99,13 @@ that must be created in the project folder
 
 - [Prismic CMS](https://prismic.io/)
 
+
 **Clone the project and access the folder**
 
 ```bash
 $ git clone https://github.com/dvargas42/space-traveling.git
 ```
+
 
 **Follow the steps below**
 
